@@ -17,7 +17,7 @@ services:
   servicea:
 #    build: .
     image: test-service-a
-#    restart: on-failure
+    restart: on-failure
     environment:
       WEATHER_HOST: serviceb
       DB_HOST: db

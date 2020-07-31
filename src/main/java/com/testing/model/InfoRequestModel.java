@@ -1,4 +1,4 @@
-package model;
+package com.testing.model;
 
 public class InfoRequestModel {
 
