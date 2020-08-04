@@ -1,4 +1,4 @@
-package utils;
+package com.testing.utils;
 
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.filter.log.LogDetail;

@@ -1,4 +1,4 @@
-package validation;
+package com.testing.validation;
 
 import com.jayway.restassured.response.Response;
 import org.testng.asserts.SoftAssert;
