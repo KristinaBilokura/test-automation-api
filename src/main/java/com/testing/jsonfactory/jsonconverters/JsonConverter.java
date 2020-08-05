@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.jayway.restassured.response.Response;
+import io.restassured.response.Response;
 import com.testing.jsonfactory.ServiceAResponse;
 
 import java.io.IOException;

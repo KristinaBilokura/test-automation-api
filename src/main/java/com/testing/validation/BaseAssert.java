@@ -1,7 +1,7 @@
 package com.testing.validation;
 
 import org.testng.asserts.SoftAssert;
-import com.jayway.restassured.response.Response;
+import io.restassured.response.Response;
 
 public class BaseAssert {
 

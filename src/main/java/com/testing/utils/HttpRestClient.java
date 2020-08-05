@@ -1,13 +1,12 @@
 package com.testing.utils;
 
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.response.Response;
-
+import io.restassured.response.Response;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
+import io.restassured.RestAssured;
 
-import static com.jayway.restassured.RestAssured.given;
+import static io.restassured.RestAssured.given;
 
 public class HttpRestClient {
 
@@ -76,7 +75,7 @@ public class HttpRestClient {
         try {
             return given().
                     headers(headers).
-                    parameter(param).
+                    formParam(param).
                     get(new URL(getBaseUrl() + endPointUrl)).
                     prettyPeek();
         } catch (MalformedURLException e) {
@@ -92,27 +91,9 @@ public class HttpRestClient {
             return given().
                     cookies(cookies).
                     headers(headers).
-                    parameter(param).
+                    formParam(param).
                     get(new URL(getBaseUrl() + endPointUrl)).
                     prettyPeek();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        return response;
-    }
-
-
-    public Response callHttpGet(String endPointUrl, Map<String, ?> params, Map<String, String> headers,
-                                Map<String, String> cookies) {
-        response = null;
-        try {
-            return given().
-                    cookies(cookies).
-                    headers(headers).
-                    parameters(params).
-                    when().get(new URL(getBaseUrl() + endPointUrl)).
-                    prettyPeek();
-
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -135,11 +116,10 @@ public class HttpRestClient {
     }
 
 
-    public Response callHttpPost(String endPointUrl, Map<String, String> headers) {
-        Response response = null;
+    public Response callHttpPost(String endPointUrl) {
+        response = null;
         try {
             return given().
-                    headers(headers).
                     post(new URL(getBaseUrl() + endPointUrl));
         } catch (MalformedURLException e) {
             e.printStackTrace();
@@ -173,7 +153,7 @@ public class HttpRestClient {
                     cookies(cookies).
                     headers(headers).
                     body(requestBody).
-                    parameter(param).
+                    formParam(param).
                     post(new URL(getBaseUrl() + endPointUrl)).
                     prettyPeek();
         } catch (MalformedURLException e) {
@@ -243,7 +223,7 @@ public class HttpRestClient {
 
 
     public Response callHttpDelete(String endPointUrl, Map<String, String> headers) {
-        Response response = null;
+        response = null;
         try {
             return given().
                     headers(headers).
@@ -256,7 +236,7 @@ public class HttpRestClient {
 
 
     public Response callHttpDelete(String endPointUrl, Map<String, String> cookies, Map<String, String> headers) {
-        Response response = null;
+        response = null;
         try {
             return given().
                     cookies(cookies).

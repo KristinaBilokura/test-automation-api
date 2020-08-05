@@ -17,19 +17,77 @@
                     <target>8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.plugin.version}</version>
+                <configuration>
+<!--                    <parallel>${parallel}</parallel>-->
+<!--                    <threadCount>${threadCount}</threadCount>-->
+                    <properties>
+                        <parallel>suite</parallel>
+                        <threadCount>1</threadCount>
+                        <property>
+                            <name>usedefaultlisteners</name>
+                            <value>true</value>
+                        </property>
+                    </properties>
+                    <systemProperties>
+                        <property>
+                            <name>allure.results.directory</name>
+                            <value>${allure.results.directory}</value>
+                        </property>
+                        <property>
+                            <name>allure.link.tms.pattern</name>
+                            <value>${tms}</value>
+                        </property>
+                    </systemProperties>
+                    <argLine>
+                        -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
+                    </argLine>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure.report.plugin.verion}</version>
+            </plugin>
         </plugins>
     </build>
 
     <properties>
         <org.apache.httpcomponents>4.5.12</org.apache.httpcomponents>
-        <com.jayway.restassured>2.9.0</com.jayway.restassured>
         <com.fasterxml.jackson.core>2.11.1</com.fasterxml.jackson.core>
         <ru.yandex.qatools.allure>1.5.4</ru.yandex.qatools.allure>
         <org.testng>7.1.0</org.testng>
         <log4j>1.2.17</log4j>
+        <surefire.plugin.version>2.22.2</surefire.plugin.version>
+        <allure.adaptor.version>1.5.4</allure.adaptor.version>
+        <allure.version>2.13.5</allure.version>
+        <allure.report.plugin.verion>2.9</allure.report.plugin.verion>
+        <allure-maven-plugin.version>2.6</allure-maven-plugin.version>
+        <aspectj.version>1.8.13</aspectj.version>
+        <allure.results.directory>
+            ${project.build.directory}/allure-results
+        </allure.results.directory>
+        <tms>
+            https://github.com/allure-framework/allure-docs/issues/{}
+        </tms>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -61,11 +119,14 @@
             <artifactId>httpclient</artifactId>
             <version>${org.apache.httpcomponents}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
         <dependency>
-            <groupId>com.jayway.restassured</groupId>
+            <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
-            <version>${com.jayway.restassured}</version>
+            <version>4.3.1</version>
+            <scope>compile</scope>
         </dependency>
+
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
